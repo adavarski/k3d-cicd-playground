@@ -24,7 +24,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-## Environment preparation
+## Local Environment Preparation
 KD3 Installation.
 ```
 wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
@@ -42,7 +42,7 @@ unzip file
 and move it  /usr/local/bin/helm
 ```
 
-## Cluster preparation
+## Local Cluster Preparation
 changed arg in Make file  --k3s-server-arg '--no-deploy=traefik' \   to  --k3s-arg '--no-deploy=traefik' \
  ```make cluster```
 
@@ -123,7 +123,7 @@ Global credentials (unrestricted) -> Add user with pasword : dockerHub credentia
 
 
 ```
-### Application CICD Configuration.
+### Application CI/CD Configuration.
 
 - Create a pipeline job into jenkins called sample-service
 - Go to SCM section and select GIT and enter your github repo URL
@@ -280,7 +280,7 @@ Docker daemon devops server setup:
 
 Note: AWS ECR example with GitLab: https://www.triggermesh.com/blog/storing-serverless-functions-on-aws-ecr-via-gitlab
 
-#### Kaniko GCP CloudBuild example: 
+#### Kaniko GCP Cloud Build example: 
 
 ```
 steps:
@@ -309,13 +309,16 @@ options:
   machineType: 'E2_HIGHCPU_8'
 timeout: 3600s
 ```
-
-### GitHub Actions CI/CD example 
-
-
-### Clean environment
+### Clean Local Environment
 ```
 k3d cluster delete sandman
 ```
+
+### [GitHub Actions CI/CD example](./github)
+
+Ref: https://github.com/AbsaOSS/k3d-action 
+
+
+
 
 
