@@ -1,0 +1,142 @@
+Started by user user
+[Pipeline] Start of Pipeline
+[Pipeline] podTemplate
+[Pipeline] {
+[Pipeline] node
+Created Pod: kubernetes default/kaniko-test-1-5dndz-vc0cx-s3j8n
+Still waiting to schedule task
+‘kaniko-test-1-5dndz-vc0cx-s3j8n’ is offline
+Agent kaniko-test-1-5dndz-vc0cx-s3j8n is provisioned from template kaniko-test_1-5dndz-vc0cx
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations:
+    buildUrl: "http://jenknis-jenkins.default.svc.cluster.local/job/kaniko-test/1/"
+    runUrl: "job/kaniko-test/1/"
+  labels:
+    jenkins: "agent"
+    jenkins/label-digest: "965b060ba733a2e283f9e7790e90dfd0adbad245"
+    jenkins/label: "kaniko-test_1-5dndz"
+  name: "kaniko-test-1-5dndz-vc0cx-s3j8n"
+  namespace: "default"
+spec:
+  containers:
+  - args:
+    - "99d"
+    command:
+    - "sleep"
+    image: "maven:3.8.1-jdk-8"
+    name: "maven"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "gcr.io/kaniko-project/executor:debug-v0.19.0"
+    name: "kaniko"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_AGENT_NAME"
+      value: "kaniko-test-1-5dndz-vc0cx-s3j8n"
+    - name: "JENKINS_WEB_SOCKET"
+      value: "true"
+    - name: "JENKINS_NAME"
+      value: "kaniko-test-1-5dndz-vc0cx-s3j8n"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenknis-jenkins.default.svc.cluster.local/"
+    image: "jenkins/inbound-agent:3107.v665000b_51092-15"
+    name: "jnlp"
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  nodeSelector:
+    kubernetes.io/os: "linux"
+  restartPolicy: "Never"
+  volumes:
+  - name: "kaniko-secret"
+    secret:
+      items:
+      - key: ".dockerconfigjson"
+        path: "config.json"
+      secretName: "dockercred"
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
+
+Running on kaniko-test-1-5dndz-vc0cx-s3j8n in /home/jenkins/agent/workspace/kaniko-test
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Get a Maven project)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/adavarski/k3d-jenkins-playground.git
+ > git init /home/jenkins/agent/workspace/kaniko-test # timeout=10
+Fetching upstream changes from https://github.com/adavarski/k3d-jenkins-playground.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+ > git fetch --tags --force --progress -- https://github.com/adavarski/k3d-jenkins-playground.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/adavarski/k3d-jenkins-playground.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 7de8cfff6d09846cf1a795cd2b4c5ea03db5dd32 (refs/remotes/origin/main)
+Commit message: "Update Jenkinsfile-Kaniko"
+First time build. Skipping changelog.
+[Pipeline] container
+[Pipeline] {
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 7de8cfff6d09846cf1a795cd2b4c5ea03db5dd32 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b main 7de8cfff6d09846cf1a795cd2b4c5ea03db5dd32 # timeout=10
+[Pipeline] stage
+[Pipeline] { (Build a Maven project)
+[Pipeline] sh
++ echo pwd
+pwd
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Java Image)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build a Go project)
+[Pipeline] sh
++ pwd
++ /kaniko/executor --context /home/jenkins/agent/workspace/kaniko-test/config.json --destination davarski/kaniko-test-build:1.0
+error checking push permissions -- make sure you entered the correct tag name, and that you are authenticated correctly, and try again: checking push permission for "davarski/kaniko-test-build:1.0": UNAUTHORIZED: authentication required; [map[Action:pull Class: Name:davarski/kaniko-test-build Type:repository] map[Action:push Class: Name:davarski/kaniko-test-build Type:repository]]
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // podTemplate
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE

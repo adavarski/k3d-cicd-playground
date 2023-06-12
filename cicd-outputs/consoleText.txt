@@ -1,0 +1,278 @@
+Started by user user
+Obtained Jenkinsfile from git https://github.com/adavarski/k3d-playground
+[Pipeline] Start of Pipeline
+[Pipeline] echo
+[WARNING] label option is deprecated. To use a static pod template, use the 'inheritFrom' option.
+[Pipeline] podTemplate
+[Pipeline] {
+[Pipeline] node
+Created Pod: kubernetes default/agent-1686387496904-2zj0h-82blg
+Agent agent-1686387496904-2zj0h-82blg is provisioned from template agent-1686387496904-2zj0h
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations:
+    buildUrl: "http://jenknis-jenkins.default.svc.cluster.local/job/simple-app/56/"
+    runUrl: "job/simple-app/56/"
+  labels:
+    jenkins: "agent"
+    jenkins/label-digest: "6232dc5d2d08cb49e918fe65bbd03326986742a7"
+    jenkins/label: "agent-1686387496904"
+  name: "agent-1686387496904-2zj0h-82blg"
+  namespace: "default"
+spec:
+  containers:
+  - command:
+    - "cat"
+    image: "docker:latest"
+    name: "app-builder"
+    tty: true
+    volumeMounts:
+    - mountPath: "/var/run/docker.sock"
+      name: "dockersock"
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_AGENT_NAME"
+      value: "agent-1686387496904-2zj0h-82blg"
+    - name: "JENKINS_WEB_SOCKET"
+      value: "true"
+    - name: "JENKINS_NAME"
+      value: "agent-1686387496904-2zj0h-82blg"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenknis-jenkins.default.svc.cluster.local/"
+    image: "jenkins/inbound-agent:3107.v665000b_51092-15"
+    name: "jnlp"
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  nodeSelector:
+    kubernetes.io/os: "linux"
+  restartPolicy: "Never"
+  serviceAccountName: "jenknis-jenkins"
+  volumes:
+  - hostPath:
+      path: "/var/run/docker.sock"
+    name: "dockersock"
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
+
+Running on agent-1686387496904-2zj0h-82blg in /home/jenkins/agent/workspace/simple-app
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/adavarski/k3d-playground
+ > git init /home/jenkins/agent/workspace/simple-app # timeout=10
+Fetching upstream changes from https://github.com/adavarski/k3d-playground
+ > git --version # timeout=10
+ > git --version # 'git version 2.30.2'
+ > git fetch --tags --force --progress -- https://github.com/adavarski/k3d-playground +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 40156f07a3ade5fb2436cca173e4642b3502b8b6 (refs/remotes/origin/main)
+Commit message: "Update Jenkinsfile"
+ > git config remote.origin.url https://github.com/adavarski/k3d-playground # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 40156f07a3ade5fb2436cca173e4642b3502b8b6 # timeout=10
+ > git rev-list --no-walk 4cb18d5ab68ab9d400ea267b05ecb9f01736d6ec # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Prepared)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ apk update
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.18/community/x86_64/APKINDEX.tar.gz
+v3.18.0-609-g03d1855762f [https://dl-cdn.alpinelinux.org/alpine/v3.18/main]
+v3.18.0-611-g4e1ba0eb7ed [https://dl-cdn.alpinelinux.org/alpine/v3.18/community]
+OK: 20072 distinct packages available
++ apk add curl
+(1/6) Installing brotli-libs (1.0.9-r14)
+(2/6) Installing libunistring (1.1-r1)
+(3/6) Installing libidn2 (2.3.4-r1)
+(4/6) Installing nghttp2-libs (1.53.0-r0)
+(5/6) Installing libcurl (8.1.2-r0)
+(6/6) Installing curl (8.1.2-r0)
+Executing busybox-1.36.0-r9.trigger
+OK: 35 MiB in 61 packages
++ apk add git
+(1/3) Installing libexpat (2.5.0-r1)
+(2/3) Installing pcre2 (10.42-r1)
+(3/3) Installing git (2.40.1-r0)
+Executing busybox-1.36.0-r9.trigger
+OK: 41 MiB in 64 packages
++ curl -L -s https://dl.k8s.io/release/stable.txt
++ curl -LO https://dl.k8s.io/release/v1.27.2/bin/linux/amd64/kubectl
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   138  100   138    0     0    806      0 --:--:-- --:--:-- --:--:--   807
+  0 46.9M    0 49297    0     0  56259      0  0:14:35 --:--:--  0:14:35 56259  8 46.9M    8 4173k    0     0  2322k      0  0:00:20  0:00:01  0:00:19 4479k 28 46.9M   28 13.2M    0     0  4838k      0  0:00:09  0:00:02  0:00:07 7020k 47 46.9M   47 22.3M    0     0  6029k      0  0:00:07  0:00:03  0:00:04 7821k 67 46.9M   67 31.4M    0     0  6723k      0  0:00:07  0:00:04  0:00:03 8213k 86 46.9M   86 40.6M    0     0  7178k      0  0:00:06  0:00:05  0:00:01 8446k100 46.9M  100 46.9M    0     0  7315k      0  0:00:06  0:00:06 --:--:-- 9194k
++ mv kubectl /usr/local/bin
++ chmod +x /usr/local/bin/kubectl
++ git clone https://github.com/adavarski/k3d-playground
+Cloning into 'k3d-playground'...
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withDockerRegistry
+Executing sh script inside container app-builder of pod agent-1686387496904-2zj0h-82blg
+Executing command: "docker" "login" "-u" "davarski" "-p" ******** "https://index.docker.io/v1/" 
+exit
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /home/jenkins/agent/workspace/simple-app@tmp/e516e227-557b-4302-8488-7d1f414c51f6/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] {
+[Pipeline] sh
++ cd k3d-playground/sample-service
++ docker build -t davarski/sample-app:1.0 .
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 ...
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 269B done
+#2 DONE 1.7s
+
+#1 [internal] load .dockerignore
+#1 DONE 2.0s
+
+#3 [internal] load metadata for docker.io/library/node:latest
+#3 ...
+
+#4 [auth] library/node:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:latest
+#3 DONE 1.8s
+
+#5 [build 1/4] FROM docker.io/library/node@sha256:0397bdebddf91cd31d96bf19124e82d44c865baf1b3aa0dc0e08334cebf02a08
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 15.62kB done
+#6 DONE 1.4s
+
+#7 [build 2/4] COPY index.js /src/
+#7 CACHED
+
+#8 [build 3/4] COPY package* /src/
+#8 CACHED
+
+#9 [build 4/4] RUN cd /src &&     npm install
+#9 CACHED
+
+#10 [stage-1 2/4] COPY --from=build /src/node_modules /dist/node_modules/
+#10 CACHED
+
+#11 [stage-1 3/4] COPY index.js /dist/
+#11 CACHED
+
+#12 [stage-1 4/4] WORKDIR /dist
+#12 CACHED
+
+#13 exporting to image
+#13 exporting layers done
+#13 writing image sha256:cbc354a7312573a8ff687c997a5949bd6c8dc70e0e716a0398b992a0a0582f6c
+#13 writing image sha256:cbc354a7312573a8ff687c997a5949bd6c8dc70e0e716a0398b992a0a0582f6c 0.1s done
+#13 naming to docker.io/davarski/sample-app:1.0 0.1s done
+#13 DONE 1.2s
++ docker push davarski/sample-app:1.0
+The push refers to repository [docker.io/davarski/sample-app]
+5f70bf18a086: Preparing
+6778a01bbd26: Preparing
+15f10e1d29e6: Preparing
+7ba096cefc95: Preparing
+334506c26d38: Preparing
+a5dca8003674: Preparing
+97ab13ba8db8: Preparing
+d140420135e3: Preparing
+b4b4f5c5ff9f: Preparing
+b0df24a95c80: Preparing
+974e52a24adf: Preparing
+d140420135e3: Waiting
+b4b4f5c5ff9f: Waiting
+b0df24a95c80: Waiting
+974e52a24adf: Waiting
+a5dca8003674: Waiting
+97ab13ba8db8: Waiting
+5f70bf18a086: Layer already exists
+15f10e1d29e6: Layer already exists
+6778a01bbd26: Layer already exists
+334506c26d38: Layer already exists
+7ba096cefc95: Layer already exists
+d140420135e3: Layer already exists
+b4b4f5c5ff9f: Layer already exists
+97ab13ba8db8: Layer already exists
+a5dca8003674: Layer already exists
+b0df24a95c80: Layer already exists
+974e52a24adf: Layer already exists
+1.0: digest: sha256:e2bed692d02bdcf6e7105b439d4e6e41bff6d79fc575077a9db0d37fde60ff6d size: 2627
+[Pipeline] }
+[Pipeline] // withDockerRegistry
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ /usr/local/bin/kubectl apply -f k3d-playground/sample-service/k8s-manifest/Deployment.yaml
+deployment.apps/app-server configured
++ /usr/local/bin/kubectl rollout restart deployment app-server '--namespace=default'
+deployment.apps/app-server restarted
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // podTemplate
+[Pipeline] End of Pipeline
+Finished: SUCCESS

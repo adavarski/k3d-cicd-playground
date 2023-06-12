@@ -1,0 +1,109 @@
+Running with gitlab-runner 14.5.2 (e91107dd)
+  on devops 3f2gjUry
+Preparing the "docker" executor
+00:16
+Using Docker executor with image gcr.io/kaniko-project/executor:debug ...
+Pulling docker image gcr.io/kaniko-project/executor:debug ...
+Using docker image sha256:be6a20bfff97ca1b38a242ca35bf9bbfad3b13b0b11d5a5b65f06694fdf0b092 for gcr.io/kaniko-project/executor:debug with digest gcr.io/kaniko-project/executor@sha256:32ba2214921892c2fa7b5f9c4ae6f8f026538ce6b2105a93a36a8b5ee50fe517 ...
+Preparing environment
+00:06
+Running on runner-3f2gjury-project-2-concurrent-0 via devops...
+Getting source from Git repository
+00:06
+Fetching changes with git depth set to 50...
+Reinitialized existing Git repository in /builds/root/docker-ansible/.git/
+Checking out fcf64de9 as main...
+Skipping Git submodules setup
+Executing "step_script" stage of the job script
+03:18
+Using docker image sha256:be6a20bfff97ca1b38a242ca35bf9bbfad3b13b0b11d5a5b65f06694fdf0b092 for gcr.io/kaniko-project/executor:debug with digest gcr.io/kaniko-project/executor@sha256:32ba2214921892c2fa7b5f9c4ae6f8f026538ce6b2105a93a36a8b5ee50fe517 ...
+$ mkdir -p /kaniko/.docker
+$ echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(echo -n ${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD} | base64)\"}}}" > /kaniko/.docker/config.json
+$ /kaniko/executor --skip-tls-verify --context ${CI_PROJECT_DIR} --dockerfile ${CI_PROJECT_DIR}/Dockerfile --destination ${CI_REGISTRY_IMAGE}:latest
+INFO[0000] Retrieving image manifest python:3           
+INFO[0000] Retrieving image python:3 from registry index.docker.io 
+INFO[0001] Built cross stage deps: map[]                
+INFO[0001] Retrieving image manifest python:3           
+INFO[0001] Returning cached image manifest              
+INFO[0001] Executing 0 build triggers                   
+INFO[0001] Building stage 'python:3' [idx: '0', base-idx: '-1'] 
+INFO[0001] Unpacking rootfs as cmd RUN apt-get update && apt-get install -y python3-netaddr   && python -m pip install ansible netaddr   && rm -rf /var/lib/apt/lists/* requires it. 
+INFO[0040] RUN apt-get update && apt-get install -y python3-netaddr   && python -m pip install ansible netaddr   && rm -rf /var/lib/apt/lists/* 
+INFO[0040] Initializing snapshotter ...                 
+INFO[0040] Taking snapshot of full filesystem...        
+INFO[0057] Cmd: /bin/sh                                 
+INFO[0057] Args: [-c apt-get update && apt-get install -y python3-netaddr   && python -m pip install ansible netaddr   && rm -rf /var/lib/apt/lists/*] 
+INFO[0057] Running: [/bin/sh -c apt-get update && apt-get install -y python3-netaddr   && python -m pip install ansible netaddr   && rm -rf /var/lib/apt/lists/*] 
+Get:1 http://deb.debian.org/debian bullseye InRelease [116 kB]
+Get:2 http://deb.debian.org/debian-security bullseye-security InRelease [48.4 kB]
+Get:3 http://deb.debian.org/debian bullseye-updates InRelease [44.1 kB]
+Get:4 http://deb.debian.org/debian bullseye/main amd64 Packages [8183 kB]
+Get:5 http://deb.debian.org/debian-security bullseye-security/main amd64 Packages [245 kB]
+Get:6 http://deb.debian.org/debian bullseye-updates/main amd64 Packages [14.8 kB]
+Fetched 8651 kB in 2s (3989 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  ieee-data
+Suggested packages:
+  ipython3 python-netaddr-docs
+The following NEW packages will be installed:
+  ieee-data python3-netaddr
+0 upgraded, 2 newly installed, 0 to remove and 3 not upgraded.
+Need to get 2142 kB of archives.
+After this operation, 13.4 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main amd64 ieee-data all 20210605.1 [1889 kB]
+Get:2 http://deb.debian.org/debian bullseye/main amd64 python3-netaddr all 0.7.19-5 [253 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 2142 kB in 0s (8597 kB/s)
+Selecting previously unselected package ieee-data.
+(Reading database ... 23426 files and directories currently installed.)
+Preparing to unpack .../ieee-data_20210605.1_all.deb ...
+Unpacking ieee-data (20210605.1) ...
+Selecting previously unselected package python3-netaddr.
+Preparing to unpack .../python3-netaddr_0.7.19-5_all.deb ...
+Unpacking python3-netaddr (0.7.19-5) ...
+Setting up ieee-data (20210605.1) ...
+Setting up python3-netaddr (0.7.19-5) ...
+Collecting ansible
+  Downloading ansible-8.0.0-py3-none-any.whl (42.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.2/42.2 MB 6.3 MB/s eta 0:00:00
+Collecting netaddr
+  Downloading netaddr-0.8.0-py2.py3-none-any.whl (1.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 6.1 MB/s eta 0:00:00
+Collecting ansible-core~=2.15.0 (from ansible)
+  Downloading ansible_core-2.15.0-py3-none-any.whl (2.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 6.4 MB/s eta 0:00:00
+Collecting jinja2>=3.0.0 (from ansible-core~=2.15.0->ansible)
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.1/133.1 kB 1.1 MB/s eta 0:00:00
+Collecting PyYAML>=5.1 (from ansible-core~=2.15.0->ansible)
+  Downloading PyYAML-6.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (757 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 757.9/757.9 kB 3.9 MB/s eta 0:00:00
+Collecting cryptography (from ansible-core~=2.15.0->ansible)
+  Downloading cryptography-41.0.1-cp37-abi3-manylinux_2_28_x86_64.whl (4.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.3/4.3 MB 7.2 MB/s eta 0:00:00
+Collecting packaging (from ansible-core~=2.15.0->ansible)
+  Downloading packaging-23.1-py3-none-any.whl (48 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.9/48.9 kB 444.5 kB/s eta 0:00:00
+Collecting resolvelib<1.1.0,>=0.5.3 (from ansible-core~=2.15.0->ansible)
+  Downloading resolvelib-1.0.1-py2.py3-none-any.whl (17 kB)
+Collecting MarkupSafe>=2.0 (from jinja2>=3.0.0->ansible-core~=2.15.0->ansible)
+  Downloading MarkupSafe-2.1.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (28 kB)
+Collecting cffi>=1.12 (from cryptography->ansible-core~=2.15.0->ansible)
+  Downloading cffi-1.15.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (462 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 462.6/462.6 kB 3.0 MB/s eta 0:00:00
+Collecting pycparser (from cffi>=1.12->cryptography->ansible-core~=2.15.0->ansible)
+  Downloading pycparser-2.21-py2.py3-none-any.whl (118 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 118.7/118.7 kB 984.9 kB/s eta 0:00:00
+Installing collected packages: resolvelib, netaddr, PyYAML, pycparser, packaging, MarkupSafe, jinja2, cffi, cryptography, ansible-core, ansible
+Successfully installed MarkupSafe-2.1.3 PyYAML-6.0 ansible-8.0.0 ansible-core-2.15.0 cffi-1.15.1 cryptography-41.0.1 jinja2-3.1.2 netaddr-0.8.0 packaging-23.1 pycparser-2.21 resolvelib-1.0.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+INFO[0105] Taking snapshot of full filesystem...        
+INFO[0151] Pushing image to gitlab.devops.davar.com:2053/root/docker-ansible:latest 
+INFO[0190] Pushed gitlab.devops.davar.com:2053/root/docker-ansible@sha256:c09984bd96dab3aed9189e7eb6104d6a9e9d10e09bb5389fc9b9bffb85347b7e 
+Cleaning up project directory and file based variables
+00:07
+Job succeeded
