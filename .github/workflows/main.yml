@@ -6,21 +6,33 @@ on:
   push:
     branches: [ main ]
 jobs:  
-  build:
+  run-k8d:
     name: Create k3d cluster
     runs-on: ubuntu-latest
 
     steps:
-     - uses: AbsaOSS/k3d-action@v2
-       name: "Create Single Cluster"
-       with:
-          cluster-name: "test-cluster-1"
+      - uses: actions/checkout@v2
+      - uses: AbsaOSS/k3d-action@v2
+        name: "Create single k3d Cluster with imported Registry"
+        with:
+          cluster-name: CI-test-cluster
           args: >-
-            -p "8083:80@agent:0:direct"
-            -p "8443:443@agent:0:direct"
-            -p "5053:53/udp@agent:0:direct"
             --agents 3
             --no-lb
-            --image docker.io/rancher/k3s:v1.20.4-k3s1
             --k3s-arg "--no-deploy=traefik,servicelb,metrics-server@server:*"
-   
+      - name: "Docker repo demo"
+        run: |
+          docker build . -t davarski/demo:v1.0.0
+          k3d image import davarski/demo:v1.0.0 -c CI-test-cluster --verbose
+          kubectl apply -f pod.yaml
+
+     pod.yaml
+    
+     apiVersion: v1
+     kind: Pod
+     metadata:
+     name: test-pod
+     spec:
+       containers:
+       - name: demo-app
+         image: davarski/demo:v1.0.0 
