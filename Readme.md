@@ -180,7 +180,7 @@ cat config.json
 - ID: for the example Jenkinsfile in this repo, use "dockercred"
 - Description: enter something meaningful
 ```
-[JenkinsFile:Kaniko](./Jenkinsfile-Kaniko)
+[JenkinsFile:Kaniko](./jenkins-kaniko/Jenkinsfile-Kaniko)
 
 ##### [Console Output-Kaniko](./cicd-outputs/consoleText-Kaniko.txt)
 
