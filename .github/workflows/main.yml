@@ -1,5 +1,5 @@
  jobs:
-  some-job:
+  job:
     steps:     
         - uses: AbsaOSS/k3d-action@v2
         name: "Create Single Cluster"
