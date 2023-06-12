@@ -309,10 +309,13 @@ options:
   machineType: 'E2_HIGHCPU_8'
 timeout: 3600s
 ```
+
+#### GitHub actions CI/CD example
+
+
 ### Clean environment
 ```
 k3d cluster delete sandman
 ```
 
-## TODO: GitHub actions CI/CD example
 
