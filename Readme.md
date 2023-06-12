@@ -310,7 +310,7 @@ options:
 timeout: 3600s
 ```
 
-#### GitHub actions CI/CD example
+### GitHub Actions CI/CD example 
 
 
 ### Clean environment
