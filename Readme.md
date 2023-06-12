@@ -1,4 +1,4 @@
-# k3d CI/CD (Jenkins, GitLab, GitHub Actions) Playground 
+# k3d CI/CD (Jenkins, GitLab, GitHub Actions, etc.) Playground 
 ## Prerequisites Installation and verification.
 Make Installation:
 ```
