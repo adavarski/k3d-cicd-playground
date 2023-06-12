@@ -314,7 +314,7 @@ timeout: 3600s
 k3d cluster delete sandman
 ```
 
-### [GitHub Actions CI/CD example](./github)
+### [GitHub Actions CI/CD example](./.github/workflows/)
 
 Ref: https://github.com/AbsaOSS/k3d-action 
 
