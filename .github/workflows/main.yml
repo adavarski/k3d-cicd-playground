@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: CICD
 
 on:
   push:
@@ -15,7 +13,7 @@ jobs:
       - uses: AbsaOSS/k3d-action@v2
         name: "Create single k3d Cluster with imported Registry"
         with:
-          cluster-name: CI-test-cluster
+          cluster-name: CICD-test-cluster
           args: >-
             --agents 3
             --no-lb
@@ -23,7 +21,7 @@ jobs:
       - name: "Docker repo demo"
         run: |
           docker build . -t davarski/demo:v1.0.0
-          k3d image import davarski/demo:v1.0.0 -c CI-test-cluster --verbose
+          k3d image import davarski/demo:v1.0.0 -c CICD-test-cluster --verbose
           kubectl run demo --image=demo:v1.0.0 --restart=Never
 
      
