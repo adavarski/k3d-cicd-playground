@@ -93,12 +93,26 @@ rules:
   verbs:
   - '*'
 
+
+
+
 kubectl get secret --namespace default jenknis-jenkins -o jsonpath="{.data.jenkins-password}" | base64 -d
 
 $ grep jenkins /etc/hosts
 192.168.1.99 devops grafana.example.com jenkins.example.com
 
 Browser: http://jenkins.example.com:8888/login (user:above password)
+
+Note/Tip: We can use nip.io for DNS instead of /etc/hosts file for jenkins/prometheus/grafana -> Example: jenkins.192.168.1.99.nip.io for ingress, where 192.168.1.99 is IP of the host where k3d is installed
+
+$ kubectl apply -f ingress-k8s-manifest/jenkins-nip.yaml
+$ kubectl get ing
+NAME              CLASS   HOSTS                         ADDRESS   PORTS   AGE
+jenkins-ingress   nginx   jenkins.192.168.1.99.nip.io             80      5s
+
+Browser: http://jenkins.192.168.1.99.nip.io:8888) (user:above password)
+
+
 
 Install Git, Pipeline, Docker, Kubernetes plugins 
 Dashboard > Manage Jenkins > Configure System
