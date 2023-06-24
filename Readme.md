@@ -334,7 +334,13 @@ k3d cluster delete sandman
 
 Ref: https://github.com/AbsaOSS/k3d-action 
 
+### Note: Using Tekton (CI part) to build/test/push docker images and ArgoCD (CD part) examples -> DevOps Cloud-native CI/CD GitOps with Tekton & ArgoCD: 
+- https://github.com/adavarski/GitOps-k3d-Tekton-ArgoCD-Go (Golang example)
+- https://github.com/adavarski/gitops-k3d-tekton-argocd (Java:Maven example)
 
+### GitHub Actions and ArgoCD examples:
+- https://github.com/adavarski/k3d-GH-Actions
+- https://github.com/adavarski/homelab
 
 
 
