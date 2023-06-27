@@ -1,4 +1,6 @@
 # k3d CI/CD (Jenkins, GitLab, GitHub Actions, etc.) Playground 
+[![CICD](https://github.com/adavarski/k3d-cicd-playground/workflows/CICD/badge.svg)](https://github.com/adavarski/k3d-cicd-playground/actions)
+
 
 ## Prerequisites Installation and verification.
 Make Installation:
