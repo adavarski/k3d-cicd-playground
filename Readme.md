@@ -144,7 +144,7 @@ Global credentials (unrestricted) -> Add user with pasword : dockerHub credentia
 
 - Create a pipeline job into jenkins called sample-service
 - Go to SCM section and select GIT and enter your github repo URL
-- Jenkinsfile path should sample-service ([Jenkins](./Jenkinsfile)
+- Jenkinsfile path should sample-service ([Jenkins](./Jenkinsfile))
 - Add docker hub creds into globle creds into jenkins
 - create docker repo into your docker account
 - Run the job if all parameters are correct application build and deploy into your k3d cluster
