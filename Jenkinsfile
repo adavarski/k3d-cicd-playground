@@ -57,7 +57,7 @@ spec:
               curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
               mv kubectl /usr/local/bin
               chmod +x /usr/local/bin/kubectl
-	      git clone https://github.com/adavarski/k3d-playground
+	      git clone https://github.com/adavarski/k3d-cicd-playground
             '''
           }
         }
@@ -68,7 +68,7 @@ spec:
             script {
               docker.withRegistry( 'https://index.docker.io/v1/', registryCredential ) {
                 sh '''
-		  cd k3d-playground/sample-service
+		  cd k3d-cicd-playground/sample-service
                   docker build -t davarski/sample-app:1.0 .
                   docker push davarski/sample-app:1.0
                 '''
@@ -81,7 +81,7 @@ spec:
         steps {
           container('app-builder') {
             sh '''
-	      /usr/local/bin/kubectl apply -f k3d-playground/sample-service/k8s-manifest/Deployment.yaml
+	      /usr/local/bin/kubectl apply -f k3d-cicd-playground/sample-service/k8s-manifest/Deployment.yaml
               /usr/local/bin/kubectl rollout restart deployment app-server --namespace=default
             '''
           }
