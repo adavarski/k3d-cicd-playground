@@ -138,13 +138,13 @@ TCP port for inbound agents -> Check: Random
 Manage Jenkins > Credentials > System
 Global credentials (unrestricted) -> Add user with pasword : dockerHub credentials: ID: Docker
 
-
 ```
+
 ### Application CI/CD Configuration.
 
 - Create a pipeline job into jenkins called sample-service
 - Go to SCM section and select GIT and enter your github repo URL
-- Jenkinsfile path should sample-service
+- Jenkinsfile path should sample-service ([Jenkins](./Jenkinsfile)
 - Add docker hub creds into globle creds into jenkins
 - create docker repo into your docker account
 - Run the job if all parameters are correct application build and deploy into your k3d cluster
