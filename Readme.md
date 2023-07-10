@@ -273,10 +273,12 @@ INFO[0030] Pushed index.docker.io/davarski/hello-kaniko@sha256:9e5e0c301dd171128
 
 #### Kaniko GitLab CI/CD pipeline example  (gcr.io/kaniko-project/executor:debug is working with GitLab Docker Repo)
 
-REF: Repo: https://github.com/adavarski/gitlab-cicd-k8s for GitLab CI & runners installation/setup
+REF: Repo: https://github.com/adavarski/homelab-gitlab-ansible for GitLab CI & runners installation/setup
 
-Greate GitLab Repo with Dockerfile & [GitLab CI pipeline](./.gitlab-ci.yml)
- 
+Create GitLab Repo with Dockerfile & [GitLab CI pipeline](./.gitlab-ci.yml)
+
+Ref(example): https://github.com/adavarski/gitlab-ansible-docker-image
+
 
 Dockerfile
 ```
