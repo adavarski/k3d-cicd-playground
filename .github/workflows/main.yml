@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 jobs:  
   run-k8d:
-    name: Create k3d cluster and deploy app
+    name: Create k3d cluster and deploy application
     runs-on: ubuntu-latest
 
     steps:
